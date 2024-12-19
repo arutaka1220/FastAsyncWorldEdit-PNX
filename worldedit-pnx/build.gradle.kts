@@ -24,7 +24,7 @@ val localImplementation = configurations.create("localImplementation") {
 }
 
 dependencies {
-    compileOnly("com.github.PowerNukkitX:PowerNukkitX:master-SNAPSHOT") {
+    compileOnly("com.github.PowerNukkitX:PowerNukkitX:snapshot") {
         exclude("junit", "junit")
         exclude(group = "org.slf4j", module = "slf4j-api")
     }
@@ -39,10 +39,11 @@ dependencies {
     implementation(libs.fastutil)
     // Platform expectations
     // Logging
-    localImplementation("org.apache.logging.log4j:log4j-api")
-    localImplementation(libs.log4jBom) {
-        because("Spigot provides Log4J (sort of, not in API, implicitly part of server)")
-    }
+    compileOnly("org.apache.logging.log4j:log4j-api")
+
+    implementation("com.google.guava:guava:33.3.1-jre")
+    implementation("com.google.code.gson:gson:2.11.0")
+
     // Third party
     implementation("dev.notmyfault.serverlib:ServerLib")
     implementation("com.intellectualsites.paster:Paster") { isTransitive = false }

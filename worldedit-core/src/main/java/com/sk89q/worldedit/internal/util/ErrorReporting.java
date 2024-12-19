@@ -34,12 +34,12 @@ public class ErrorReporting {
     }
 
     public static void trigger(Actor actor, Throwable error) {
-        actor.printError(Caption.of("worldedit.command.error.report"));
-        TextComponent.Builder errorBuilder = TextComponent.builder(error.getClass().getName() + ": " + error.getMessage());
-        if (actor.hasPermission("worldedit.error.detailed")) {
-            errorBuilder = errorBuilder.hoverEvent(HoverEvent.showText(TextComponent.of(Throwables.getStackTraceAsString(error))));
-        }
-        actor.print(errorBuilder.build());
+//        actor.printError(Caption.of("worldedit.command.error.report"));
+//        TextComponent.Builder errorBuilder = TextComponent.builder(error.getClass().getName() + ": " + error.getMessage());
+//        if (actor.hasPermission("worldedit.error.detailed")) {
+//            errorBuilder = errorBuilder.hoverEvent(HoverEvent.showText(TextComponent.of(Throwables.getStackTraceAsString(error))));
+//        }
+//        actor.print(errorBuilder.build());
     }
 
 }

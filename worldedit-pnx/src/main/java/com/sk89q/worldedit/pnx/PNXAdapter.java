@@ -427,13 +427,17 @@ public final class PNXAdapter {
     @Nullable
     public static ItemType asItemType(Item material) {
         //FAWE start - logic moved to IPNXAdapter
-        var result = MappingRegistries.ITEM.getMapping().get(ItemMappings.HashItem.of(material));
-        if (result == null) {
-            material = material.clone();
-            material.setDamage(MappingRegistries.ITEM.getItemDamageMapping().get(material.getId()).intValue());
-            return MappingRegistries.ITEM.getMapping().get(ItemMappings.HashItem.of(material));
-        } else {
-            return result;
+        try {
+            var result = MappingRegistries.ITEM.getMapping().get(ItemMappings.HashItem.of(material));
+            if (result == null) {
+                material = material.clone();
+                material.setDamage(MappingRegistries.ITEM.getItemDamageMapping().get(material.getId()).intValue());
+                return MappingRegistries.ITEM.getMapping().get(ItemMappings.HashItem.of(material));
+            } else {
+                return result;
+            }
+        } catch(Exception e) {
+            return null;
         }
         //FAWE end
     }

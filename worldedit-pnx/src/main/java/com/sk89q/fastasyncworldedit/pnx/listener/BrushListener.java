@@ -25,49 +25,57 @@ public class BrushListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerItemHoldEvent(final PlayerItemHeldEvent event) {
-        final Player pnxPlayer = event.getPlayer();
-        if (pnxPlayer.isSneaking()) {
-            return;
-        }
-        PNXPlayer player = PNXAdapter.adapt(pnxPlayer);
-        LocalSession session = player.getSession();
-        Tool tool = session.getTool(player);
-        if (tool instanceof ScrollTool scrollable) {
-            final int slot = event.getSlot();
-            final int oldSlot = event.getSlot();
-            final int ri;
-            if ((((slot - oldSlot) <= 4) && ((slot - oldSlot) > 0)) || (((slot - oldSlot) < -4))) {
-                ri = 1;
-            } else {
-                ri = -1;
+        try {
+            final Player pnxPlayer = event.getPlayer();
+            if (pnxPlayer.isSneaking()) {
+                return;
             }
-            if (scrollable.increment(player, ri)) {
-                final HumanInventory inv = pnxPlayer.getInventory();
-                final Item item = inv.getItem(slot);
-                final Item newItem = inv.getItem(oldSlot);
+            PNXPlayer player = PNXAdapter.adapt(pnxPlayer);
+            LocalSession session = player.getSession();
+            Tool tool = session.getTool(player);
+            if (tool instanceof ScrollTool scrollable) {
+                final int slot = event.getSlot();
+                final int oldSlot = event.getSlot();
+                final int ri;
+                if ((((slot - oldSlot) <= 4) && ((slot - oldSlot) > 0)) || (((slot - oldSlot) < -4))) {
+                    ri = 1;
+                } else {
+                    ri = -1;
+                }
+                if (scrollable.increment(player, ri)) {
+                    final HumanInventory inv = pnxPlayer.getInventory();
+                    final Item item = inv.getItem(slot);
+                    final Item newItem = inv.getItem(oldSlot);
 
-                inv.setItem(slot, newItem);
-                inv.setItem(oldSlot, item);
-                inv.sendContents(pnxPlayer);
+                    inv.setItem(slot, newItem);
+                    inv.setItem(oldSlot, item);
+                    inv.sendContents(pnxPlayer);
+                }
             }
+        } catch(Exception e) {
+
         }
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(final PlayerInteractEvent event) {
-        final Player pnxPlayer = event.getPlayer();
-        if (pnxPlayer.isSneaking()) {
-            if (event.getAction() == PlayerInteractEvent.Action.PHYSICAL) {
-                return;
-            }
-            com.sk89q.worldedit.entity.Player player = PNXAdapter.adapt(pnxPlayer);
-            LocalSession session = player.getSession();
-            Tool tool = session.getTool(player);
-            if (tool instanceof ResettableTool) {
-                if (((ResettableTool) tool).reset()) {
-                    event.setCancelled(true);
+        try {
+            final Player pnxPlayer = event.getPlayer();
+            if (pnxPlayer.isSneaking()) {
+                if (event.getAction() == PlayerInteractEvent.Action.PHYSICAL) {
+                    return;
+                }
+                com.sk89q.worldedit.entity.Player player = PNXAdapter.adapt(pnxPlayer);
+                LocalSession session = player.getSession();
+                Tool tool = session.getTool(player);
+                if (tool instanceof ResettableTool) {
+                    if (((ResettableTool) tool).reset()) {
+                        event.setCancelled(true);
+                    }
                 }
             }
+        } catch(Exception e) {
+
         }
     }
 

@@ -122,50 +122,52 @@ public class WorldEditListener implements Listener {
      */
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (!plugin.getInternalPlatform().isHookingEvents()) {
-            return;
-        }
-
-        final Player player = plugin.wrapPlayer(event.getPlayer());
-        final World world = player.getWorld();
-        final WorldEdit we = plugin.getWorldEdit();
-        final Direction direction = PNXAdapter.adapt(event.getFace());
-
-        PlayerInteractEvent.Action action = event.getAction();
-        if (action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) {
-            final Block clickedBlock = event.getBlock();
-            final Location pos = new Location(world, clickedBlock.getX(), clickedBlock.getY(), clickedBlock.getZ());
-
-            if (we.handleBlockLeftClick(player, pos, direction)) {
-                event.setCancelled(true);
+        try {
+            if (!plugin.getInternalPlatform().isHookingEvents()) {
+                return;
             }
 
-            if (we.handleArmSwing(player)) {
-                event.setCancelled(true);
-            }
+            final Player player = plugin.wrapPlayer(event.getPlayer());
+            final World world = player.getWorld();
+            final WorldEdit we = plugin.getWorldEdit();
+            final Direction direction = PNXAdapter.adapt(event.getFace());
 
-        } else if (action == PlayerInteractEvent.Action.LEFT_CLICK_AIR) {
+            PlayerInteractEvent.Action action = event.getAction();
+            if (action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) {
+                final Block clickedBlock = event.getBlock();
+                final Location pos = new Location(world, clickedBlock.getX(), clickedBlock.getY(), clickedBlock.getZ());
 
-            if (we.handleArmSwing(player)) {
-                event.setCancelled(true);
-            }
+                if (we.handleBlockLeftClick(player, pos, direction)) {
+                    event.setCancelled(true);
+                }
 
-        } else if (action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-            final Block clickedBlock = event.getBlock();
-            final Location pos = new Location(world, clickedBlock.getX(), clickedBlock.getY(), clickedBlock.getZ());
+                if (we.handleArmSwing(player)) {
+                    event.setCancelled(true);
+                }
 
-            if (we.handleBlockRightClick(player, pos, direction)) {
-                event.setCancelled(true);
-            }
+            } else if (action == PlayerInteractEvent.Action.LEFT_CLICK_AIR) {
 
-            if (we.handleRightClick(player)) {
-                event.setCancelled(true);
+                if (we.handleArmSwing(player)) {
+                    event.setCancelled(true);
+                }
+
+            } else if (action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
+                final Block clickedBlock = event.getBlock();
+                final Location pos = new Location(world, clickedBlock.getX(), clickedBlock.getY(), clickedBlock.getZ());
+
+                if (we.handleBlockRightClick(player, pos, direction)) {
+                    event.setCancelled(true);
+                }
+
+                if (we.handleRightClick(player)) {
+                    event.setCancelled(true);
+                }
+            } else if (action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
+                if (we.handleRightClick(player)) {
+                    event.setCancelled(true);
+                }
             }
-        } else if (action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
-            if (we.handleRightClick(player)) {
-                event.setCancelled(true);
-            }
-        }
+        } catch(Exception e) {}
     }
 
     @EventHandler

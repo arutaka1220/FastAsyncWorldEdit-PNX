@@ -187,8 +187,8 @@ public final class AsyncCommandBuilder<T> {
                     throw orig;
                 }
             } catch (Throwable unknown) {
-                sender.print(failure.append(Caption.of("worldedit.command.error.report")));
-                LOGGER.error("Uncaught exception occurred in task: " + description, orig);
+//                sender.print(failure.append(Caption.of("worldedit.command.error.report")));
+//                LOGGER.error("Uncaught exception occurred in task: " + description, orig);
             }
         }
         return result;

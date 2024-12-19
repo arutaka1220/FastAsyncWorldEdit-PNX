@@ -10,6 +10,8 @@ import cn.nukkit.level.updater.block.BlockStateUpdater_1_20_40;
 import cn.nukkit.level.updater.block.BlockStateUpdater_1_20_50;
 import cn.nukkit.level.updater.block.BlockStateUpdater_1_20_60;
 import cn.nukkit.level.updater.block.BlockStateUpdater_1_20_70;
+import cn.nukkit.level.updater.block.BlockStateUpdater_1_20_80;
+import cn.nukkit.level.updater.block.BlockStateUpdater_1_21_0;
 import cn.nukkit.level.updater.util.tagupdater.CompoundTagUpdaterContext;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.TreeMapCompoundTag;
@@ -59,7 +61,9 @@ public final class BlockRegistryPopulator {
             BlockStateUpdater_1_20_40.INSTANCE,
             BlockStateUpdater_1_20_50.INSTANCE,
             BlockStateUpdater_1_20_60.INSTANCE,
-            BlockStateUpdater_1_20_70.INSTANCE
+            BlockStateUpdater_1_20_70.INSTANCE,
+            BlockStateUpdater_1_20_80.INSTANCE,
+            BlockStateUpdater_1_21_0.INSTANCE
     );
 
     public static void initMapping2(BlockMappings blockMappings) {
@@ -98,10 +102,10 @@ public final class BlockRegistryPopulator {
                 final int i = HashUtils.fnv1a_32_nbt(remappedTag);
                 cn.nukkit.block.BlockState pnxBlockState = Registries.BLOCKSTATE.get(i);
                 if (pnxBlockState == null && !experimentalBlocks.contains(remappedTag.getString("name"))) {
-                    PNXWorldEditPlugin
-                            .getInstance()
-                            .getLogger()
-                            .error("cant find block state for %s".formatted(remappedTag.toSNBT()));
+//                    PNXWorldEditPlugin
+//                            .getInstance()
+//                            .getLogger()
+//                            .error("cant find block state for %s".formatted(remappedTag.toSNBT()));
                     pnxBlockState = BlockAir.STATE;
                 }
                 PNX2FAWE.put(pnxBlockState, BlockState.get(k));
@@ -340,10 +344,10 @@ public final class BlockRegistryPopulator {
                 final int i = HashUtils.fnv1a_32_nbt(remappedTag);
                 cn.nukkit.block.BlockState pnxBlockState = Registries.BLOCKSTATE.get(i);
                 if (pnxBlockState == null && !experimentalBlocks.contains(remappedTag.getString("name"))) {
-                    PNXWorldEditPlugin
-                            .getInstance()
-                            .getLogger()
-                            .error("cant find block state for %s".formatted(remappedTag.toSNBT()));
+//                    PNXWorldEditPlugin
+//                            .getInstance()
+//                            .getLogger()
+//                            .error("cant find block state for %s".formatted(remappedTag.toSNBT()));
                     pnxBlockState = BlockAir.STATE;
                 }
                 FAWE2PNX.put(k, pnxBlockState);

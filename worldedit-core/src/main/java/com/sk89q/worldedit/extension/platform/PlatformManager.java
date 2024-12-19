@@ -461,9 +461,9 @@ public class PlatformManager {
         if (faweException != null) {
             actor.print(Caption.of("fawe.cancel.reason", faweException.getComponent()));
         } else {
-            actor.print(Caption.of("worldedit.command.error.report"));
-            actor.print(TextComponent.of(e.getClass().getName()+ ": " + e.getMessage()));
-            e.printStackTrace();
+//            actor.print(Caption.of("worldedit.command.error.report"));
+//            actor.print(TextComponent.of(e.getClass().getName()+ ": " + e.getMessage()));
+//            e.printStackTrace();
         }
     }
     //FAWE end
@@ -515,9 +515,9 @@ public class PlatformManager {
             if (faweException != null) {
                 player.print(Caption.of("fawe.cancel.reason", faweException.getComponent()));
             } else {
-                player.print(Caption.of("worldedit.command.error.report"));
-                player.print(TextComponent.of(e.getClass().getName() + ": " + e.getMessage()));
-                e.printStackTrace();
+//                player.print(Caption.of("worldedit.command.error.report"));
+//                player.print(TextComponent.of(e.getClass().getName() + ": " + e.getMessage()));
+//                e.printStackTrace();
             }
             //FAWE end
         } finally {

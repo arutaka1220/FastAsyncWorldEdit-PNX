@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class FileRegistries {
 
-    public static final int DATA_VERSION = 3700;
+    public static final int DATA_VERSION = 4189;
 
     private final PNXWorldEditPlugin app;
     private final Gson gson = new GsonBuilder().create();
